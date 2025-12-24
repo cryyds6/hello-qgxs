@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qgxs&Hello</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0ea5e9',
+                        dark: '#0f172a',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        handwriting: ['Pacifico', 'cursive'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .glow {
+                filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.6));
+            }
+            .glow-lg {
+                filter: drop-shadow(0 0 16px rgba(14, 165, 233, 0.4));
+            }
+            .bg-grid {
+                background-size: 20px 20px;
+                background-image: 
+                    linear-gradient(to right, rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
+            }
+            .text-sweep {
+                background: linear-gradient(90deg, 
+                    rgba(255,255,255,0.2), 
+                    rgba(255,255,255,0.8), 
+                    rgba(255,255,255,0.2));
+                background-size: 200% 100%;
+                animation: sweep 3s ease-in-out infinite;
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                position: relative;
+            }
+            .text-sweep::before {
+                content: attr(data-text);
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: linear-gradient(90deg, #ff0000, #ff9900, #33cc33, #3399ff, #cc33ff);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                z-index: -1;
+            }
+            @keyframes sweep {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
+            }
+            
+            .compact-stat {
+                background: rgba(14, 165, 233, 0.1);
+                backdrop-filter: blur(4px);
+                border: 1px solid rgba(14, 165, 233, 0.2);
+            }
+        }
+    </style>
+</head>
+<body class="bg-dark text-white min-h-screen flex flex-col items-center justify-center overflow-hidden">
+    <div class="fixed inset-0 bg-grid z-0"></div>
+
+    <div class="fixed w-[80vh] h-[80vh] rounded-full bg-primary/20 blur-[120px] -translate-x-1/2 -translate-y-1/2 z-0"></div>
+    <div class="fixed w-[60vh] h-[60vh] rounded-full bg-primary/10 blur-[100px] translate-x-1/3 translate-y-1/3 z-0"></div>
+
+    <main class="relative z-10 flex flex-col items-center text-center p-6 w-full max-w-2xl">
+        <div class="relative mb-4">
+            <div class="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-2 border-primary/30 glow">
+                <img src="https://blog.20210701.xyz/130044290.png" alt="Avatar" class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <h1 class="text-[clamp(2rem,5vw,3rem)] font-handwriting mb-2" data-text="Hello Qgxs">
+            <span class="text-sweep">Hello Qgxs</span>
+        </h1>
+
+        <!-- 紧凑版欢迎文本 -->
+        <div class="text-gray-300 text-sm md:text-base mb-6 max-w-md leading-tight px-4">
+            <p class="mb-2 opacity-90">
+                <span class="text-primary/90">欢迎到来。</span>
+                愿本站伴我走过春秋岁月，
+            </p>
+            <p class="opacity-90">
+                也祝各位访客<span class="text-primary/90 ml-1">生活顺心。</span>
+            </p>
+        </div>
+
+        <div class="flex gap-3 mb-6">
+            <a href="https://blog.20210701.xyz/" class="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 transition-all glow flex items-center gap-1.5 text-sm hover:scale-105 transform duration-300">
+                <i class="fa fa-book text-primary text-xs"></i>
+                <span>博客</span>
+            </a>
+            <a href="https://20210701.xyz/" class="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 transition-all glow flex items-center gap-1.5 text-sm hover:scale-105 transform duration-300">
+                <i class="fa fa-flag text-primary text-xs"></i>
+                <span>100周年</span>
+            </a>
+        </div>
+
+        <a href="https://blog.20210701.xyz/about.html" class="px-6 py-2.5 rounded-full bg-gradient-to-r from-primary to-sky-400 hover:from-sky-400 hover:to-primary transition-all glow text-white font-medium mb-8 hover:scale-105 transform duration-300 text-sm">
+            关于我
+        </a>
+    </main>
+
+    <!-- 紧凑统计信息 -->
+    <div class="relative z-10 mt-2 mb-1">
+        <div class="compact-stat px-3 py-1.5 rounded-full glow flex items-center gap-2 text-xs">
+            <div class="flex items-center gap-1">
+                <i class="fa fa-clock-o text-primary"></i>
+                <span id="run-days" class="font-medium">计算中...</span>
+            </div>
+            
+            <div class="w-1 h-1 rounded-full bg-primary/40"></div>
+            
+            <div class="flex items-center gap-1">
+                <i class="fa fa-eye text-primary"></i>
+                <span id="busuanzi_container_site_pv" class="whitespace-nowrap">
+                    浏览 <span id="busuanzi_value_site_pv" class="font-medium">--</span>
+                </span>
+            </div>
+            
+            <div class="w-1 h-1 rounded-full bg-primary/40"></div>
+            
+            <div class="flex items-center gap-1">
+                <i class="fa fa-user text-primary"></i>
+                <span id="busuanzi_container_site_uv" class="whitespace-nowrap">
+                    访客 <span id="busuanzi_value_site_uv" class="font-medium">--</span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <footer class="relative z-10 mt-1 py-4 text-gray-400 text-xs w-full text-center">
+        © 2025 Hello Qgxs. All rights reserved.
+    </footer>
+
+    <!-- 不蒜子脚本 -->
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('main');
+            main.style.opacity = 0;
+            main.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                main.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                main.style.opacity = 1;
+                main.style.transform = 'translateY(0)';
+            }, 100);
+
+            const calculateRunDays = () => {
+                const startDate = new Date('2025-01-01');
+                const today = new Date();
+                const runDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+                return runDays;
+            };
+
+            const updateRunDays = () => {
+                const runDays = calculateRunDays();
+                const runDaysElement = document.getElementById('run-days');
+                if (runDaysElement) {
+                    runDaysElement.textContent = `${runDays}天`;
+                    runDaysElement.classList.add('animate-pulse');
+                    setTimeout(() => {
+                        runDaysElement.classList.remove('animate-pulse');
+                    }, 300);
+                }
+            };
+
+            const checkBusuanziLoaded = () => {
+                const pvElement = document.getElementById('busuanzi_value_site_pv');
+                const uvElement = document.getElementById('busuanzi_value_site_uv');
+                
+                let loaded = false;
+                
+                if (pvElement && pvElement.textContent && pvElement.textContent !== '--') {
+                    loaded = true;
+                    pvElement.classList.add('animate-pulse');
+                    setTimeout(() => {
+                        pvElement.classList.remove('animate-pulse');
+                    }, 300);
+                }
+                
+                if (uvElement && uvElement.textContent && uvElement.textContent !== '--') {
+                    loaded = true;
+                    uvElement.classList.add('animate-pulse');
+                    setTimeout(() => {
+                        uvElement.classList.remove('animate-pulse');
+                    }, 300);
+                }
+                
+                if (loaded) {
+                    updateRunDays();
+                }
+                
+                return loaded;
+            };
+
+            updateRunDays();
+            
+            if (!checkBusuanziLoaded()) {
+                const checkInterval = setInterval(() => {
+                    if (checkBusuanziLoaded()) {
+                        clearInterval(checkInterval);
+                    }
+                }, 200);
+                
+                setTimeout(() => {
+                    clearInterval(checkInterval);
+                    const pvElement = document.getElementById('busuanzi_value_site_pv');
+                    const uvElement = document.getElementById('busuanzi_value_site_uv');
+                    
+                    if (pvElement && pvElement.textContent === '--') {
+                        pvElement.textContent = '0';
+                    }
+                    if (uvElement && uvElement.textContent === '--') {
+                        uvElement.textContent = '0';
+                    }
+                    
+                    updateRunDays();
+                }, 3000);
+            }
+
+            setInterval(updateRunDays, 30 * 60 * 1000);
+        });
+    </script>
+</body>
+</html>
