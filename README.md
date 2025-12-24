@@ -1,8 +1,17 @@
 # hello-qgxs
 一个完全免费、美观实用、易于维护的静态个人主页！
 
-# 静态页面，可以在各种地方部署
 # http://www.20210701.xyz
+
+静态页面，可以在各种地方部署
+1. Cloudflare Pages
+
+2. Vercel
+
+3. GitHub Pages
+
+4. Netlify
+
 页面功能介绍：
 
 🎨 设计特点
