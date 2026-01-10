@@ -122,29 +122,20 @@
         </a>
     </main>
 
-    <!-- 紧凑统计信息 -->
+    <!-- 紧凑统计信息 - 使用 Vercount -->
     <div class="relative z-10 mt-2 mb-1">
-        <div class="compact-stat px-3 py-1.5 rounded-full glow flex items-center gap-2 text-xs">
+        <div class="compact-stat px-3 py-1.5 rounded-full glow flex items-center gap-3 text-xs">
             <div class="flex items-center gap-1">
                 <i class="fa fa-clock-o text-primary"></i>
                 <span id="run-days" class="font-medium">计算中...</span>
             </div>
             
-            <div class="w-1 h-1 rounded-full bg-primary/40"></div>
+            <div class="text-primary/40">•</div>
             
             <div class="flex items-center gap-1">
                 <i class="fa fa-eye text-primary"></i>
-                <span id="busuanzi_container_site_pv" class="whitespace-nowrap">
-                    浏览 <span id="busuanzi_value_site_pv" class="font-medium">--</span>
-                </span>
-            </div>
-            
-            <div class="w-1 h-1 rounded-full bg-primary/40"></div>
-            
-            <div class="flex items-center gap-1">
-                <i class="fa fa-user text-primary"></i>
-                <span id="busuanzi_container_site_uv" class="whitespace-nowrap">
-                    访客 <span id="busuanzi_value_site_uv" class="font-medium">--</span>
+                <span class="whitespace-nowrap">
+                    浏览 <span id="vercount_value_site_pv" class="font-medium">Loading</span>次
                 </span>
             </div>
         </div>
@@ -154,8 +145,8 @@
         © 2025 Hello Qgxs. All rights reserved.
     </footer>
 
-    <!-- 不蒜子脚本 -->
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <!-- Vercount 官方脚本 -->
+    <script defer src="https://events.vercount.one/js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -168,8 +159,9 @@
                 main.style.transform = 'translateY(0)';
             }, 100);
 
+            // 运行天数计算
             const calculateRunDays = () => {
-                const startDate = new Date('2025-01-01');
+                const startDate = new Date('2025-12-24');
                 const today = new Date();
                 const runDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
                 return runDays;
@@ -187,60 +179,51 @@
                 }
             };
 
-            const checkBusuanziLoaded = () => {
-                const pvElement = document.getElementById('busuanzi_value_site_pv');
-                const uvElement = document.getElementById('busuanzi_value_site_uv');
+            // 初始化运行天数
+            updateRunDays();
+            
+            // 检查 Vercount 数据是否加载完成
+            const checkVercountLoaded = () => {
+                const pvElement = document.getElementById('vercount_value_site_pv');
                 
-                let loaded = false;
-                
-                if (pvElement && pvElement.textContent && pvElement.textContent !== '--') {
-                    loaded = true;
+                if (pvElement && pvElement.textContent && pvElement.textContent !== 'Loading') {
+                    // 移除 "Loading" 文字，显示数字时添加动画
                     pvElement.classList.add('animate-pulse');
                     setTimeout(() => {
                         pvElement.classList.remove('animate-pulse');
                     }, 300);
+                    
+                    // 格式化数字（添加千分位）
+                    const count = parseInt(pvElement.textContent);
+                    if (!isNaN(count)) {
+                        pvElement.textContent = count.toLocaleString();
+                    }
+                    
+                    return true;
                 }
                 
-                if (uvElement && uvElement.textContent && uvElement.textContent !== '--') {
-                    loaded = true;
-                    uvElement.classList.add('animate-pulse');
-                    setTimeout(() => {
-                        uvElement.classList.remove('animate-pulse');
-                    }, 300);
-                }
-                
-                if (loaded) {
-                    updateRunDays();
-                }
-                
-                return loaded;
+                return false;
             };
 
-            updateRunDays();
-            
-            if (!checkBusuanziLoaded()) {
+            // 监听 Vercount 数据变化
+            if (!checkVercountLoaded()) {
                 const checkInterval = setInterval(() => {
-                    if (checkBusuanziLoaded()) {
+                    if (checkVercountLoaded()) {
                         clearInterval(checkInterval);
                     }
-                }, 200);
+                }, 500);
                 
+                // 5秒后停止检查
                 setTimeout(() => {
                     clearInterval(checkInterval);
-                    const pvElement = document.getElementById('busuanzi_value_site_pv');
-                    const uvElement = document.getElementById('busuanzi_value_site_uv');
-                    
-                    if (pvElement && pvElement.textContent === '--') {
+                    const pvElement = document.getElementById('vercount_value_site_pv');
+                    if (pvElement && pvElement.textContent === 'Loading') {
                         pvElement.textContent = '0';
                     }
-                    if (uvElement && uvElement.textContent === '--') {
-                        uvElement.textContent = '0';
-                    }
-                    
-                    updateRunDays();
-                }, 3000);
+                }, 5000);
             }
 
+            // 每30分钟更新运行天数
             setInterval(updateRunDays, 30 * 60 * 1000);
         });
     </script>
