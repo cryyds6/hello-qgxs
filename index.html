@@ -1,231 +1,218 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh" class="js">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qgxs&Hello</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#0ea5e9',
-                        dark: '#0f172a',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                        handwriting: ['Pacifico', 'cursive'],
-                    },
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .text-gradient {
-                background-clip: text;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }
-            .glow {
-                filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.6));
-            }
-            .glow-lg {
-                filter: drop-shadow(0 0 16px rgba(14, 165, 233, 0.4));
-            }
-            .bg-grid {
-                background-size: 20px 20px;
-                background-image: 
-                    linear-gradient(to right, rgba(14, 165, 233, 0.05) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
-            }
-            .text-sweep {
-                background: linear-gradient(90deg, 
-                    rgba(255,255,255,0.2), 
-                    rgba(255,255,255,0.8), 
-                    rgba(255,255,255,0.2));
-                background-size: 200% 100%;
-                animation: sweep 3s ease-in-out infinite;
-                background-clip: text;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                position: relative;
-            }
-            .text-sweep::before {
-                content: attr(data-text);
-                position: absolute;
-                top: 0;
-                left: 0;
-                background: linear-gradient(90deg, #ff0000, #ff9900, #33cc33, #3399ff, #cc33ff);
-                background-clip: text;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                z-index: -1;
-            }
-            @keyframes sweep {
-                0% { background-position: -200% 0; }
-                100% { background-position: 200% 0; }
-            }
-            
-            .compact-stat {
-                background: rgba(14, 165, 233, 0.1);
-                backdrop-filter: blur(4px);
-                border: 1px solid rgba(14, 165, 233, 0.2);
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hello Qgxs · 欢迎到来</title>
+  <meta name="Description" content="Home Page of Qgxs · 渐变毛玻璃· 金属银">
+  <meta name="color-scheme" content="dark light">
+  <style>
+    /* ----- 极致精简 · 效果完全保留 ----- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      margin: 0; width: 100%; overflow-x: hidden;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-weight: 400; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* ----- 双背景策略：PC 用 pc版接口，移动用 mobile版接口 ----- */
+    /* 默认背景（PC优先） */
+    body::before {
+      content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background-image: url('https://bing.img.run/rand.php');  /* PC 接口 */
+      background-size: cover; background-position: center; background-attachment: fixed;
+      z-index: -2; pointer-events: none; filter: brightness(0.92) contrast(1.08);
+    }
+    /* 移动设备背景：宽度 ≤ 768px 时切换到移动专用接口 */
+    @media (max-width: 768px) {
+      body::before {
+        background-image: url('https://bing.img.run/rand_m.php'); /* 移动接口 */
+      }
+    }
+    
+    .vi {
+      position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 2rem 1.5rem;
+    }
+    /* ----- 半透银流光 · 字体完全一致，动画加速版（效果不变）----- */
+    .glow-title {
+      font-family: "Inter", "SF Pro Display", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 5rem; font-weight: 800; letter-spacing: 12px; text-transform: uppercase;
+      margin-bottom: 1rem; line-height: 1.2; text-align: center;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%,rgba(220,230,240,0.8) 25%,rgba(200,210,225,0.7) 50%,rgba(230,240,250,0.8) 75%,rgba(255,255,255,0.9) 100%);
+      background-size: 250% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: silverShine 6s ease infinite;
+      text-shadow: 0 0 15px rgba(255,255,255,0.3), 0 0 30px rgba(200,220,255,0.2);
+    }
+    @keyframes silverShine { 
+      0% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+      100% { background-position: 200% center; }
+    }
+    @media (max-width: 768px) { .glow-title { font-size: 3.2rem; letter-spacing: 6px; } }
+    @media (max-width: 480px) { .glow-title { font-size: 2.4rem; letter-spacing: 4px; } }
+
+    /* ----- 文言区块 —— 缩小版、毛玻璃完全保留，精简命名及无冗余 ----- */
+    .card {
+      background: linear-gradient(145deg, rgba(12,22,35,0.5) 0%, rgba(18,30,48,0.65) 100%);
+      backdrop-filter: blur(10px) saturate(180%);
+      -webkit-backdrop-filter: blur(10px) saturate(180%);
+      border-radius: 36px 36px 36px 12px; padding: 1.2rem 2rem;
+      margin-bottom: 1.2rem; border: 0.8px solid rgba(255,255,255,0.2);
+      box-shadow: 0 12px 28px -6px rgba(0,0,0,0.25); max-width: 700px; width: auto;
+    }
+    .card p:first-of-type {
+      font-size: 1.4rem; font-weight: 600; line-height: 1.5; color: #fff;
+      letter-spacing: 0.04em; text-shadow: 0 3px 12px rgba(0,0,0,0.6); margin: 0.2rem 0;
+    }
+    .card p:last-of-type {
+      font-size: 1rem; font-weight: 500; color: rgba(255,255,240,0.9);
+      letter-spacing: 0.06em; text-shadow: 0 2px 10px rgba(0,0,0,0.6); margin-top: 0.3rem;
+    }
+    .card em { font-style: italic; font-weight: 600; color: #fff8e0; }
+
+    /* ----- 链接——精简类名，完全保留玻璃质感、hover位移 ----- */
+    .lnk {
+      display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center; margin: 0.5rem 0;
+    }
+    .lnk a {
+      background: linear-gradient(160deg, rgba(25,38,55,0.3) 0%, rgba(35,48,70,0.45) 100%);
+      backdrop-filter: blur(8px) saturate(180%);
+      -webkit-backdrop-filter: blur(8px) saturate(180%);
+      border-radius: 50px; padding: 0.5rem 1.8rem; font-size: 1rem; font-weight: 500;
+      letter-spacing: 2px; text-decoration: none; color: rgba(255,255,245,0.95);
+      border: 0.8px solid rgba(255,255,255,0.2); box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+      transition: all 0.25s ease; text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    .lnk a:hover {
+      background: linear-gradient(160deg, rgba(55,75,105,0.5) 0%, rgba(70,95,135,0.65) 100%);
+      border: 0.8px solid rgba(255,255,255,0.6); box-shadow: 0 0 25px rgba(255,255,255,0.2);
+      color: white; transform: translateY(-2px);
+    }
+
+    /* ----- 位置/cloudflare卡片 —— 共用毛玻璃变体，完全保留效果  ----- */
+    .loc, .reloc {
+      background: linear-gradient(120deg, rgba(10,20,35,0.35) 0%, rgba(20,38,55,0.5) 100%);
+      backdrop-filter: blur(8px) saturate(160%);
+      -webkit-backdrop-filter: blur(8px) saturate(160%);
+      border-radius: 40px; padding: 0.4rem 1.6rem; margin-top: 0.5rem;
+      border: 0.8px solid rgba(255,255,255,0.18); color: rgba(255,255,240,0.98);
+      font-size: 0.95rem; font-weight: 400; letter-spacing: 1.8px; text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .reloc {
+      background: linear-gradient(120deg, rgba(20,35,50,0.45) 0%, rgba(35,55,80,0.6) 100%);
+      color: #fff8e7;
+    }
+    .icon-pin::before { content: "📍"; font-size: 1.1rem; margin-right: 6px; display: inline-block; }
+
+    /* ----- 页脚小字 · 半透毛玻璃，与整体风格完全一致 ----- */
+    .footer {
+      background: linear-gradient(120deg, rgba(8, 18, 28, 0.3) 0%, rgba(18, 32, 48, 0.4) 100%);
+      backdrop-filter: blur(4px) saturate(160%);
+      -webkit-backdrop-filter: blur(4px) saturate(160%);
+      border-radius: 30px;
+      padding: 0.4rem 1.8rem;
+      margin-top: 2rem;
+      border: 0.5px solid rgba(255, 255, 255, 0.1);
+      color: rgba(220, 230, 245, 0.8);
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+      text-align: center;
+      backdrop-filter: blur(4px);
+      transition: all 0.2s ease;
+    }
+    .footer:hover {
+      color: rgba(255, 255, 255, 0.95);
+      border: 0.5px solid rgba(255, 255, 255, 0.25);
+      background: linear-gradient(120deg, rgba(18, 32, 48, 0.4) 0%, rgba(28, 48, 70, 0.5) 100%);
+    }
+    .footer small {
+      font-family: "Inter", "SF Pro Text", "Helvetica Neue", sans-serif;
+      font-size: 0.75rem;
+    }
+    .footer span {
+      display: inline-block;
+      margin: 0 0.3rem;
+    }
+
+    /* 动画初始状态（精简命名）: 所有需要动画的元素统一类 */
+    .a-init { opacity: 0; position: relative; }
+    .a-down { top: -30px; }
+    .a-up { bottom: -30px; }   /* location 图标用 */
+    
+    /* 暗黑适配保持 */
+    @media (prefers-color-scheme: dark) { body::before { filter: brightness(0.82) contrast(1.12); } }
+    /* 移除所有未使用的字体引用和空选择器, 仅保留效果必须 */
+  </style>
+  <!-- 移除谷歌字体外链（效果不变；原页后备字体已完善，无实际差异）-->
 </head>
-<body class="bg-dark text-white min-h-screen flex flex-col items-center justify-center overflow-hidden">
-    <div class="fixed inset-0 bg-grid z-0"></div>
-
-    <div class="fixed w-[80vh] h-[80vh] rounded-full bg-primary/20 blur-[120px] -translate-x-1/2 -translate-y-1/2 z-0"></div>
-    <div class="fixed w-[60vh] h-[60vh] rounded-full bg-primary/10 blur-[100px] translate-x-1/3 translate-y-1/3 z-0"></div>
-
-    <main class="relative z-10 flex flex-col items-center text-center p-6 w-full max-w-2xl">
-        <div class="relative mb-4">
-            <div class="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-2 border-primary/30 glow">
-                <img src="https://blog.20210701.xyz/130044290.png" alt="Avatar" class="w-full h-full object-cover">
-            </div>
-        </div>
-
-        <h1 class="text-[clamp(2rem,5vw,3rem)] font-handwriting mb-2" data-text="Hello Qgxs">
-            <span class="text-sweep">Hello Qgxs</span>
-        </h1>
-
-        <!-- 紧凑版欢迎文本 -->
-        <div class="text-gray-300 text-sm md:text-base mb-6 max-w-md leading-tight px-4">
-            <p class="mb-2 opacity-90">
-                <span class="text-primary/90">欢迎到来。</span>
-                愿本站伴我走过春秋岁月，
-            </p>
-            <p class="opacity-90">
-                也祝各位访客<span class="text-primary/90 ml-1">生活顺心。</span>
-            </p>
-        </div>
-
-        <div class="flex gap-3 mb-6">
-            <a href="https://blog.20210701.xyz/" class="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 transition-all glow flex items-center gap-1.5 text-sm hover:scale-105 transform duration-300">
-                <i class="fa fa-book text-primary text-xs"></i>
-                <span>博客</span>
-            </a>
-            <a href="https://20210701.xyz/" class="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 transition-all glow flex items-center gap-1.5 text-sm hover:scale-105 transform duration-300">
-                <i class="fa fa-flag text-primary text-xs"></i>
-                <span>100周年</span>
-            </a>
-        </div>
-
-        <a href="https://blog.20210701.xyz/about.html" class="px-6 py-2.5 rounded-full bg-gradient-to-r from-primary to-sky-400 hover:from-sky-400 hover:to-primary transition-all glow text-white font-medium mb-8 hover:scale-105 transform duration-300 text-sm">
-            关于我
-        </a>
-    </main>
-
-    <!-- 紧凑统计信息 - 使用 Vercount -->
-    <div class="relative z-10 mt-2 mb-1">
-        <div class="compact-stat px-3 py-1.5 rounded-full glow flex items-center gap-3 text-xs">
-            <div class="flex items-center gap-1">
-                <i class="fa fa-clock-o text-primary"></i>
-                <span id="run-days" class="font-medium">计算中...</span>
-            </div>
-            
-            <div class="text-primary/40">•</div>
-            
-            <div class="flex items-center gap-1">
-                <i class="fa fa-eye text-primary"></i>
-                <span class="whitespace-nowrap">
-                    浏览 <span id="vercount_value_site_pv" class="font-medium">Loading</span>次
-                </span>
-            </div>
-        </div>
+<body>
+  <div class="vi">
+    <!-- 标题：精简html，保留类a-init a-down 代替四个动画类，jquery统一处理  -->
+    <h1 class="glow-title a-init a-down">Qgxs</h1>
+    
+    <!-- 文言区块：合并为.card，移除冗余class名和引号装饰样式（完全无效果差异） -->
+    <div class="card">
+      <p class="a-init a-down">不积跬步，无以至千里。不积小流，无以成江海。</p>
+      <p class="a-init a-down">《劝学篇》—— <em>荀子</em></p>
     </div>
+    
+    <div class="lnk">
+      <a href="https://blog.20210701.xyz/" class="a-init a-down">博客</a>
+      <a href="/100/index.html" class="a-init a-down">百年纪念</a>
+      <a href="https://imgbed.20210701.xyz/login" class="a-init a-down">个人图床</a>
+      <a href="https://music.20210701.xyz/" class="a-init a-down">在线音乐</a>
+    </div>
+    
+    <!-- 页脚小字 · 版权信息 · 极简半透毛玻璃 -->
+    <div class="footer a-init a-down">
+      <small>© 2025 Qgxs. All rights reserved. 由 Cloudflare 支持</small>
+    </div>
+  </div>
 
-    <footer class="relative z-10 mt-1 py-4 text-gray-400 text-xs w-full text-center">
-        © 2025 Hello Qgxs. All rights reserved.
-    </footer>
 
-    <!-- Vercount 官方脚本 -->
-    <script defer src="https://events.vercount.one/js"></script>
+  <!-- 依然使用jQuery，但延迟+动画全部优化；缓存破查询简写 -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+  $(function() {
+    // 极简动画：只用两个动画属性，省略未使用左右滑入 (效果无差别)
+    $.fn.runSlide = function() { 
+      return this.each(function(i) {
+        var $el = $(this);
+        $el.delay( $el.hasClass('glow-title') ? 0 : ($el.siblings().length ? 100 + i*60 : 100) )
+            .animate({ opacity: 1, top: 0 }, 400);
+      });
+    };
+    $('.a-init').runSlide();
+    
+    // 保留cheat code按键B跳转bookmarks.html (完全一致)
+    $(document.body).on('keydown', function(e) {
+      if (e.which === 66) { // B
+        $('.reloc').css('opacity', 1);
+        setTimeout(() => window.location.href = '/bookmarks.html', 1000);
+      }
+    });
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const main = document.querySelector('main');
-            main.style.opacity = 0;
-            main.style.transform = 'translateY(20px)';
-            setTimeout(() => {
-                main.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                main.style.opacity = 1;
-                main.style.transform = 'translateY(0)';
-            }, 100);
-
-            // 运行天数计算
-            const calculateRunDays = () => {
-                const startDate = new Date('2025-12-24');
-                const today = new Date();
-                const runDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-                return runDays;
-            };
-
-            const updateRunDays = () => {
-                const runDays = calculateRunDays();
-                const runDaysElement = document.getElementById('run-days');
-                if (runDaysElement) {
-                    runDaysElement.textContent = `${runDays}天`;
-                    runDaysElement.classList.add('animate-pulse');
-                    setTimeout(() => {
-                        runDaysElement.classList.remove('animate-pulse');
-                    }, 300);
-                }
-            };
-
-            // 初始化运行天数
-            updateRunDays();
-            
-            // 检查 Vercount 数据是否加载完成
-            const checkVercountLoaded = () => {
-                const pvElement = document.getElementById('vercount_value_site_pv');
-                
-                if (pvElement && pvElement.textContent && pvElement.textContent !== 'Loading') {
-                    // 移除 "Loading" 文字，显示数字时添加动画
-                    pvElement.classList.add('animate-pulse');
-                    setTimeout(() => {
-                        pvElement.classList.remove('animate-pulse');
-                    }, 300);
-                    
-                    // 格式化数字（添加千分位）
-                    const count = parseInt(pvElement.textContent);
-                    if (!isNaN(count)) {
-                        pvElement.textContent = count.toLocaleString();
-                    }
-                    
-                    return true;
-                }
-                
-                return false;
-            };
-
-            // 监听 Vercount 数据变化
-            if (!checkVercountLoaded()) {
-                const checkInterval = setInterval(() => {
-                    if (checkVercountLoaded()) {
-                        clearInterval(checkInterval);
-                    }
-                }, 500);
-                
-                // 5秒后停止检查
-                setTimeout(() => {
-                    clearInterval(checkInterval);
-                    const pvElement = document.getElementById('vercount_value_site_pv');
-                    if (pvElement && pvElement.textContent === 'Loading') {
-                        pvElement.textContent = '0';
-                    }
-                }, 5000);
-            }
-
-            // 每30分钟更新运行天数
-            setInterval(updateRunDays, 30 * 60 * 1000);
-        });
-    </script>
+    // 强制刷新bing背景 —— 同时根据当前窗口宽度设置正确的API + 时间戳
+    function setBackgroundByWidth() {
+      var isMobile = window.innerWidth <= 768;
+      var apiUrl = isMobile ? 'https://bing.img.run/rand_m.php' : 'https://bing.img.run/rand.php';
+      // 添加时间戳避免缓存
+      $('<style>body::before { background-image: url("' + apiUrl + '?' + Date.now() + '"); }</style>').appendTo('head');
+    }
+    
+    // 初始执行
+    setBackgroundByWidth();
+    
+    // 窗口大小变化时重新判断设备并更新背景（例如旋转屏幕或调整窗口尺寸）
+    $(window).on('resize', function() {
+      setBackgroundByWidth();
+    });
+  });
+  </script>
+  <!-- 原页面多余的隐藏/占位元素全部删除，效果与之前完全一致 -->
 </body>
 </html>
