@@ -36,10 +36,17 @@
    · 博客链接（带书本图标）
    · 100周年纪念链接（带旗帜图标）
    · "关于我" 渐变按钮
-3. 智能统计系统
-   · 网站运行天数：从指定日期自动计算
-   · 总浏览量（PV）：使用Vercount统计
-   · 紧凑的水平布局显示
+3. bing 自适应随机API
+
+4. 加上即可强制跳转www
+```
+  <!-- //强制跳转www -->
+<script>
+if (location.hostname.slice(0, 4) !== 'www.') {
+  location.href = '//www.' + location.host + location.pathname;
+}
+</script>
+```
 
 ⚡ 技术亮点
 
